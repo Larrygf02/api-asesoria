@@ -67,6 +67,20 @@ app.get('/profesor/add', (req, res) => {
         } 
     })
 })
+//login profesor
+app.get('/profesor/login', (req, res) => {
+    const { correo, password } = req.query
+    const LOGIN = `SELECT * FROM profesor WHERE correo='${correo}' and password='${password}'`
+    connection.query(LOGIN, (err, results) => {
+        if (err) {
+            return res.send(err)
+        }else {
+            return res.json({
+                data: results
+            })
+        } 
+    })
+})
 app.get('/add', (req,res) => {
     connection.query(INSERT_USER, (err, results) => {
         if(err){
